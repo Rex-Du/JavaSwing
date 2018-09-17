@@ -22,6 +22,7 @@ class MazeData:
         self.exitX = m-2
         self.exitY = n-1
         self.maze = numpy.empty([m, n],numpy.string_)
+        self.visited = numpy.zeros([m, n], dtype=bool)
         for i in range(m):
             for j in range(n):
                 if i%2==1 and j%2==1:
@@ -32,6 +33,8 @@ class MazeData:
         self.maze[self.exitX][self.exitY] = self.rode
         # print(self.maze)
 
+    def in_area(self, x, y):
+        return x>0 and y>0 and x<self.m and y<self.n
 
     @property
     def m(self):
@@ -48,6 +51,11 @@ class MazeData:
     @n.setter
     def n(self, value):
         self.__n = value
+
+class Position:
+    def __init__(self, x, y):
+        self.x=x
+        self.y=y
 
 if __name__ == '__main__':
     m = MazeData(101, 101)
